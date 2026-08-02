@@ -3,6 +3,7 @@
  * @brief    cppJSON - lightweight C++ JSON library implementation
  * @note     Derived from Bwar/CJsonObject (formerly neb::CJsonObject).
  *           Original author: bwarliao (2014).
+ *           Reworked by AI coding tools (Claude Code) — see README.md.
  *           JSON core: cJSON v1.7.19 (MIT) + patches; float printing: Ryu.
  *           See README.md and THIRD_PARTY_LICENSES.md.
  * @date     2014-7-16 (original) / 2026-08-02 (cppJSON rename & extensions)

@@ -59,11 +59,19 @@
 
 本项目（`cppJSON`）**派生自 [Bwar/CJsonObject](https://github.com/Bwar/CJsonObject)**（原 `neb::CJsonObject`），感谢原作者 Bwar 的开源贡献。
 
+> **AI 改造声明（诚实披露）**：本项目由 **AI 编程工具（Claude Code）** 在 Bwar/CJsonObject 基础上改造完成。
+> AI 承担了主要改造工作：类名更名 `cppJSON`、移除 `neb` 命名空间、新增 C++11 特性
+> （精确 64 位整数、STL 容器互转、map 风格赋值、`operator|` 默认值读取、`GetNextValue` 数组遍历、
+> Ryū 浮点打印）、重构构建流程（CMake 构建时拉取 cJSON v1.7.19 + Ryū 并应用补丁）。
+> 原作者的代码结构与设计思路是本项目的基础，但改造后的代码主体由 AI 生成，
+> 请使用者知悉。
+
 相比原版的主要变更：
 
 - 类名 `neb::CJsonObject` → 全局类 **`cppJSON`**（移除 `neb` 命名空间）
 - 底层 cJSON 升级并扩展（精确 64 位整数、Ryū 浮点打印）
 - 新增 STL 容器互转、map 风格赋值、`operator|` 默认值读取等特性
+- 构建流程重构（CMake，构建时拉取 cJSON + Ryū，不再随仓库发布第三方源码）
 
 ## Fork 声明
 

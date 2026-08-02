@@ -57,11 +57,19 @@ Positioning:
 
 This project (`cppJSON`) is **derived from [Bwar/CJsonObject](https://github.com/Bwar/CJsonObject)** (formerly `neb::CJsonObject`). Thanks to the original author Bwar for the open-source contribution.
 
+> **AI-modified disclosure (honest)**: This project was reworked by **AI coding tooling (Claude Code)** on top of Bwar/CJsonObject.
+> AI did the bulk of the work: renaming the class to `cppJSON`, removing the `neb` namespace, adding C++11 features
+> (exact 64-bit integers, STL container interop, map-style assignment, `operator|` default-value reads,
+> `GetNextValue` O(n) array traversal, Ryu float printing), and restructuring the build (CMake fetches
+> cJSON v1.7.19 + Ryu and applies patches at build time). The original author's code structure and design
+> are the foundation, but the modified codebase is largely AI-generated — please be aware.
+
 Main changes vs. the original:
 
 - Class `neb::CJsonObject` → global **`cppJSON`** (the `neb` namespace was removed)
 - Upgraded & extended the underlying cJSON (exact 64-bit integers, Ryu float printing)
 - Added STL container interop, map-style assignment, `operator|` default-value reads, etc.
+- Restructured build (CMake; cJSON + Ryu fetched at build time, third-party sources no longer vendored)
 
 ## Fork statement
 
