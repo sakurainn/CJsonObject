@@ -1,11 +1,22 @@
-.git/
+# Build directories (CMake fetches cJSON/Ryu into build/)
+build/
+cjson_src/
+ryu_src/
+
+# IDE / editor
 .settings/
-*.o
-*.so
 .cproject
 .project
 *.swp
+
+# Build artifacts
+*.o
+*.so
+*.a
+*.obj
 *.exe
+
+# Misc
 *.txt
 *.log
 *.json

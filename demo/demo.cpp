@@ -2,11 +2,11 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include "../CJsonObject.hpp"
+#include "../cppJSON.hpp"
 
 void error_test()
 {
-    neb::CJsonObject item;
+    cppJSON item;
     double data = 0.0;
     item.Add("neg", -316.2);
     item.AddEmptySubArray("xxx");
@@ -23,7 +23,7 @@ int main(int argc, char* argv[])
     std::ifstream fin(argv[1]);
     if (fin.good())
     {
-        neb::CJsonObject oJson;
+        cppJSON oJson;
         std::stringstream ssContent;
         ssContent << fin.rdbuf();
         if (oJson.Parse(ssContent.str()))
@@ -39,7 +39,7 @@ int main(int argc, char* argv[])
     int iValue;
     double fTimeout;
     std::string strValue;
-    neb::CJsonObject oJson("{\"refresh_interval\":60,"
+    cppJSON oJson("{\"refresh_interval\":60,"
                         "\"test_float\":[18.0, 10.0, 5.0],"
                         "\"test_int\":[135355, -1844674407370955161, -935375],"
                         "\"timeout\":12.5,"
@@ -90,7 +90,7 @@ int main(int argc, char* argv[])
      std::cout << oJson.ToFormattedString() << std::endl;
 
      std::cout << "-------------------------------------------------------------------" << std::endl;
-     neb::CJsonObject oCopyJson = oJson;
+     cppJSON oCopyJson = oJson;
      if (oCopyJson == oJson)
      {
          std::cout << "json equal" << std::endl;
@@ -122,6 +122,22 @@ int main(int argc, char* argv[])
      {
          std::cout << "in string: " << oJson["test_int"](i) << std::endl;
      }
+     std::cout << "----------------array traversal----------------------" << std::endl;
+     oJson["test_float"].ResetArrayTraversing();
+     double dTraverse = 0.0;
+     int iTraverseCount = 0;
+     while (oJson["test_float"].GetNextValue(dTraverse))
+     {
+         std::cout << "traverse float: " << dTraverse << std::endl;
+         ++iTraverseCount;
+     }
+     std::cout << "float traverse count: " << iTraverseCount << std::endl;
+     oJson["test_int"].ResetArrayTraversing();
+     int64 llTraverse = 0;
+     while (oJson["test_int"].GetNextValue(llTraverse))
+     {
+         std::cout << "traverse int64: " << llTraverse << std::endl;
+     }
      oJson.AddNull("null_value");
      std::cout << oJson.IsNull("test_float") << "\t" << oJson.IsNull("null_value") << std::endl;
      oJson["test_float"].AddNull();
@@ -130,14 +146,13 @@ int main(int argc, char* argv[])
      if (oJson.KeyExist("simeout"))
          std::cout << "timeout key exist" << std::endl;
 
-     neb::CJsonObject oLongLong("{\"long_long\":1283949231388184576}");
+     cppJSON oLongLong("{\"long_long\":1283949231388184576}");
      int64 llValue = 0;
      uint64 ullValue = 0;
      oLongLong.Get("long_long", llValue);
      oLongLong.Get("long_long", ullValue);
      std::cout << "llValue = " << llValue << ",  ullValue = " << ullValue << std::endl;
-     //oJson.Add("json_move", std::move(oLongLong)); // C++11
-     oJson.AddWithMove("json_move", oLongLong);  
+     oJson.Add("json_move", std::move(oLongLong)); // C++11
      std::cout << oJson.ToString() << std::endl;
  
      error_test();
